@@ -45,7 +45,7 @@ public class MainWindowController implements Initializable
         Parent root = fxLoader.load();
         
         OtherWindowController owc = fxLoader.getController();
-        owc.myMethod(edtName.getText());
+        owc.setParentWindowController(this);
         
         Scene scene = new Scene(root);
         
@@ -53,6 +53,11 @@ public class MainWindowController implements Initializable
         myNewStage.showAndWait();
         
         fnig.setText("Button clicked");
+    }
+    
+    public String getName()
+    {
+        return edtName.getText();
     }
     
     @Override

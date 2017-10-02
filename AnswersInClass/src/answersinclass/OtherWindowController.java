@@ -22,6 +22,7 @@ public class OtherWindowController implements Initializable
     @FXML
     private Label lblName;
 
+    private MainWindowController parent;
     /**
      * Initializes the controller class.
      */
@@ -31,8 +32,9 @@ public class OtherWindowController implements Initializable
         // TODO
     }    
     
-    public void myMethod(String name)
+    public void setParentWindowController(MainWindowController parent)
     {
-        lblName.setText(name);
+        this.parent = parent;
+        lblName.setText(parent.getName());
     }
 }
