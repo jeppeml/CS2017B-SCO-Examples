@@ -15,16 +15,9 @@ public class Egg extends Animal
         eggImage.scale(20,20);
     }
     
-    /**
-     * Act - do whatever the Egg wants to do. This method is called whenever
-     * the 'Act' or 'Run' button gets pressed in the environment.
-     */
-    public void act() 
+    private void hatch()
     {
-        super.act();
-        if(super.getTimePassed()==250)
-        {
-            int randomNumber = Greenfoot.getRandomNumber(2);
+        int randomNumber = Greenfoot.getRandomNumber(2);
             if(randomNumber==1)
             {
                 // This will spawn a snake on same position as egg
@@ -32,7 +25,26 @@ public class Egg extends Animal
                 // Removes itself from the world
                 getWorld().removeObject(this);
             }
-            
+    }
+    
+    /**
+     * Act - do whatever the Egg wants to do. This method is called whenever
+     * the 'Act' or 'Run' button gets pressed in the environment.
+     */
+    public void act() 
+    {
+        Snake.funNumber = 7;
+        super.act();
+        if(super.getTimePassed()==250)
+        {
+           hatch();
+        }
+        
+        World w = getWorld();
+        int amountOfWorms = w.getObjects(Snake.class).size();
+        if(amountOfWorms > 0)
+        {
+            // SCream
         }
         // Add your action code here.
     }    

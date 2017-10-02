@@ -8,7 +8,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public abstract class Animal extends Actor
 {
-    int timePassed = 0;
+    public int timePassed = 0;
     
     public int getTimePassed()
     {
