@@ -16,6 +16,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -27,12 +28,26 @@ import javafx.stage.Stage;
 public class MainWindowController implements Initializable
 {
     
+    public static void staticMethod()
+    {
+    }
+    
     @FXML
     private Label fnig;
     @FXML
     private Button button;
     @FXML
     private TextField edtName;
+    @FXML
+    private ListView<String> lstNames;
+    
+    public void addScore(String name, int score)
+    {
+        lstNames.getItems().add(
+                name +  
+                " : " +
+                score);
+    }
     
     @FXML
     private void handleButtonAction(ActionEvent event) throws IOException
