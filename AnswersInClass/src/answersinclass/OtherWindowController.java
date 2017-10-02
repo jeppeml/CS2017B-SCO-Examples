@@ -60,6 +60,7 @@ public class OtherWindowController implements Initializable
     {
         parent.addScore("Jeppe", 12);
     }
+    
 
     @FXML
     private void calculateScore(ActionEvent event)
