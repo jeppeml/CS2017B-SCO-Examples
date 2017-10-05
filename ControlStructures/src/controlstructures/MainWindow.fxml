@@ -2,13 +2,21 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane id="AnchorPane" prefHeight="409.0" prefWidth="418.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.65" fx:controller="controlstructures.MainWindowController">
+<AnchorPane id="AnchorPane" prefHeight="628.0" prefWidth="486.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.65" fx:controller="controlstructures.MainWindowController">
     <children>
-        <Button fx:id="button" layoutX="309.0" layoutY="350.0" onAction="#handleButtonAction" text="Click Me!" />
-        <Label fx:id="label" layoutX="53.0" layoutY="188.0" minHeight="16" minWidth="69" text="text" />
-      <TextField fx:id="edtInput" layoutX="39.0" layoutY="58.0" prefHeight="27.0" prefWidth="336.0" />
+        <Button fx:id="button" layoutX="348.0" layoutY="66.0" onAction="#handleButtonAction" text="Click Me!" />
+      <TextField fx:id="edtInput" layoutX="20.0" layoutY="31.0" prefHeight="27.0" prefWidth="403.0" />
+      <Label layoutX="20.0" layoutY="14.0" text="Please input age" />
+      <Label fx:id="lblTextAdventure" layoutX="20.0" layoutY="104.0" prefHeight="63.0" prefWidth="403.0" text="You're in a big room, behind you are 20 orcs, bloodthirsty and sharp swords, they storm against you. Which spell will you use?" wrapText="true" />
+      <TextField fx:id="edtTextAdventure" layoutX="20.0" layoutY="167.0" prefHeight="27.0" prefWidth="285.0" />
+      <Button layoutX="319.0" layoutY="167.0" mnemonicParsing="false" onAction="#clickDoIt" prefHeight="27.0" prefWidth="102.0" text="Do it!" />
+      <Label fx:id="lblAgeOutput" layoutX="20.0" layoutY="58.0" />
+      <ListView fx:id="lstCommands" layoutX="17.0" layoutY="226.0" prefHeight="200.0" prefWidth="409.0" />
+      <Label layoutX="20.0" layoutY="202.0" text="Valid commands/spells" />
+      <Button fx:id="btnAnnoy" layoutX="316.0" layoutY="440.0" mnemonicParsing="false" onAction="#clickAnnoy" text="Don't click this" />
     </children>
 </AnchorPane>
