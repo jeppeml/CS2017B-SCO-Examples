@@ -157,22 +157,23 @@ public class MainWindowController implements Initializable
     }
 
     @FXML
-    private void clickAnnoy(ActionEvent event) throws IOException
+    private void clickAnnoy(ActionEvent event) throws IOException, InterruptedException
     {
-        for (int i = 0; i < 100; i++)
+        for (int i = 0; i < 10; i++)
         {
             Stage primStage = (Stage)lblAgeOutput.getScene().getWindow();
             FXMLLoader fxLoader = new FXMLLoader(
                     getClass().getResource("AnnoyWindow.fxml"));
             Parent root = fxLoader.load();
-            root.layoutXProperty().setValue(Math.random()*600);
-            root.layoutYProperty().setValue(Math.random()*600);
+            //root.layoutXProperty().setValue(Math.random()*600);
+            //root.layoutYProperty().setValue(Math.random()*600);
             Stage stage = new Stage(); // new window
+            stage.setX(Math.random()*600);
+            stage.setY(Math.random()*600);
             Scene scene = new Scene(root);
             stage.setScene(scene);
             stage.initOwner(primStage);
             stage.initModality(Modality.WINDOW_MODAL);
-
             stage.show();
         }
         
