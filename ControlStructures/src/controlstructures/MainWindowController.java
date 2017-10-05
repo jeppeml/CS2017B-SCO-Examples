@@ -59,7 +59,7 @@ public class MainWindowController implements Initializable
         }
         else if(!isOld) // will always occur
         {
-            lblAgeOutput.setText("You can go to a juvinile facility");
+            lblAgeOutput.setText("You can go to a juvenile facility");
         }
         else
         {
@@ -96,7 +96,7 @@ public class MainWindowController implements Initializable
     {
         ObservableList<String> list = FXCollections.observableArrayList();
         
-        list.add("1: Spell of immense lightning");
+        list.add("1: Spell of immence lightning");
         list.add("2: Fireball of doom");
         list.add("3: Reanimate from blood");
         list.add("4: Summon demon of lesser evil");
