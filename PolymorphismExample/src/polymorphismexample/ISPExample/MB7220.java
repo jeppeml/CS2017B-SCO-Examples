@@ -26,6 +26,8 @@ public class MB7220 extends CableModem
     @Override
     public void update(String path)
     {
+        // special handshake connection 
+        // do other special stuff for MB7220
         //Update code here MB7220
     }
 
