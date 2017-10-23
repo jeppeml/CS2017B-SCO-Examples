@@ -17,8 +17,8 @@ public class Warehouse
     
     public Warehouse()
     {
-        items.add("Bomb");
-        items.add("AK47");
+        items.add("Semtex");
+        items.add("AKM");
         items.add("M4");
         items.add("M16");
         items.add("Trout");

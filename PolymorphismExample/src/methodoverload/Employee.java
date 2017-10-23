@@ -16,6 +16,17 @@ public class Employee
         this.name=name;
         this.SSN = SSN;
     }
+
+    public Employee(String name, String address, String SSN, String jobdescription, String bDate)
+    {
+        this.name = name;
+        this.address = address;
+        this.SSN = SSN;
+        this.jobdescription = jobdescription;
+        this.bDate = bDate;
+    }
+    
+    
     String name;
     String address;
     String SSN;
