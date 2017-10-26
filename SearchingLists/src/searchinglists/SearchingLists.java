@@ -5,6 +5,8 @@
  */
 package searchinglists;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author jeppjleemoritzled
@@ -15,7 +17,8 @@ public class SearchingLists
      * @param args the command line arguments
      */
     public static void main(String[] args) throws InterruptedException
-    {
+    {   
+        
         int[] myInts = new int[40_000_000];
         
         for (int i = 0; i < myInts.length; i++)
