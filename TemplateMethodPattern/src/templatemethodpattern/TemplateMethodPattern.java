@@ -5,6 +5,8 @@
  */
 package templatemethodpattern;
 
+import java.util.Scanner;
+
 /**
  *
  * @author jeppjleemoritzled
@@ -17,15 +19,16 @@ public class TemplateMethodPattern
      */
     public static void main(String[] args)
     {
-        Person jim = new Janitor(30, 56, "Jim Jungle");
-        Person dennis = new Doctor(89, 43, "Dennis Dangle");
-        Person peter = new Programmer(0, 99, "Peter Ptegger");
+        Janitor jim = new Janitor(30, 56, "Jim Jungle");
+        Doctor dennis = new Doctor(89, 43, "Dennis Dangle");
+        Programmer peter = new Programmer(0, 99, "Peter Ptegger");
         
         doDay(jim);
         doDay(dennis);
         doDay(peter);
         
-        
+        Scanner scan = new Scanner(System.in);
+        System.out.println("You wrote:" + scan.next());
     }
     
     public static void doDay(Person person)

@@ -15,11 +15,11 @@ class Doctor extends Person
     {
         super(tiredness, health, name);
     }
-
     @Override
     public void findWillPower()
     {
         System.out.println(getName() + ": Doing loads of coke, feeling GREEEAT!");
+        setHealth(getHealth()-10);
     }
 
     @Override
