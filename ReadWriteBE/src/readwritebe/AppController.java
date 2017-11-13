@@ -5,9 +5,12 @@
  */
 package readwritebe;
 
+import java.io.*; // OLD java IO
 import java.net.URL;
-import java.nio.file.*;
-import java.util.ResourceBundle;
+import java.nio.file.*; // NEW java IO
+import java.util.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -24,19 +27,62 @@ public class AppController implements Initializable {
     @FXML
     private ListView<Prisoner> lstPrisoners;
     
-  
-    
     @FXML
     private void handleButtonAction(ActionEvent event) {
-        System.out.println("You clicked me!");
+        // New
+        List<String> allLinesAsStrings = new ArrayList();
         
-        Prisoner peter = new Prisoner("343-455-843", "Peter Stegger", 
-                "Arab", "Saudi Arabia", 400);
         Path path = Paths.get("Prisoners.csv");
-        if(Files.isReadable(path))
-            System.out.println("File is readable");
+        try {
+            allLinesAsStrings = Files.readAllLines(path);
+        }
+        catch (IOException ex) {
+            Logger.getLogger(AppController.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
-        lstPrisoners.getItems().add(peter);
+        allLinesAsStrings.remove(0); // Removes header
+        for (String line : allLinesAsStrings) {
+                String[] fields = line.split(",");
+                Prisoner tempPrisoner = new Prisoner(
+                        fields[0], 
+                        fields[1], 
+                        fields[2], 
+                        fields[3], 
+                        Integer.parseInt(fields[4]));
+                
+                lstPrisoners.getItems().add(tempPrisoner);
+        }
+        
+        /*
+        // OLD
+        // Ensures close of the reader
+        // Reads into meory line by line as a Prisoner
+        try (BufferedReader br = new BufferedReader(
+                new FileReader("Prisoners.csv")))
+        {
+            Scanner scanner = new Scanner(br);
+            scanner.nextLine(); // First line skip
+            while(scanner.hasNext())
+            {
+                String line = scanner.nextLine();
+                String[] fields = line.split(",");
+                Prisoner tempPrisoner = new Prisoner(
+                        fields[0], 
+                        fields[1], 
+                        fields[2], 
+                        fields[3], 
+                        Integer.parseInt(fields[4]));
+                
+                lstPrisoners.getItems().add(tempPrisoner);
+            }
+        }
+        catch (FileNotFoundException ex) {
+            Logger.getLogger(AppController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        catch (IOException ex) {
+            Logger.getLogger(AppController.class.getName()).log(Level.SEVERE, null, ex);
+        }*/
+        
         
     }   
     
