@@ -19,7 +19,7 @@ public class ReadWriteBE extends Application {
     
     @Override
     public void start(Stage stage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("App.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("gui/TextView.fxml"));
         
         Scene scene = new Scene(root);
         

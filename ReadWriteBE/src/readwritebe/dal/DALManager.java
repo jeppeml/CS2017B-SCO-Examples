@@ -3,42 +3,29 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package readwritebe;
+package readwritebe.dal;
 
-import java.io.*; // OLD java IO
-import java.net.URL;
-import java.nio.file.*; // NEW java IO
+import java.io.IOException;
+import java.nio.file.*;
 import java.util.*;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
-import javafx.scene.control.*;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import readwritebe.be.Prisoner;
 
 /**
  *
  * @author jeppjleemoritzled
  */
-public class AppController implements Initializable {
+public class DALManager {
 
-    @FXML
-    private Button button;
-    @FXML
-    private ListView<Prisoner> lstPrisoners;
-    
-    @FXML
-    private void handleButtonAction(ActionEvent event) {
-        // New
+    public ObservableList<Prisoner> getAllPrisoners() throws IOException {
+
         List<String> allLinesAsStrings = new ArrayList();
+        ObservableList<Prisoner> prisoners = 
+                FXCollections.observableArrayList();
         
         Path path = Paths.get("Prisoners.csv");
-        try {
-            allLinesAsStrings = Files.readAllLines(path);
-        }
-        catch (IOException ex) {
-            Logger.getLogger(AppController.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        allLinesAsStrings = Files.readAllLines(path);
         
         allLinesAsStrings.remove(0); // Removes header
         for (String line : allLinesAsStrings) {
@@ -50,8 +37,9 @@ public class AppController implements Initializable {
                         fields[3], 
                         Integer.parseInt(fields[4]));
                 
-                lstPrisoners.getItems().add(tempPrisoner);
+                prisoners.add(tempPrisoner);
         }
+        return prisoners;
         
         /*
         // OLD
@@ -83,12 +71,6 @@ public class AppController implements Initializable {
             Logger.getLogger(AppController.class.getName()).log(Level.SEVERE, null, ex);
         }*/
         
-        
-    }   
-    
-    @Override
-    public void initialize(URL url, ResourceBundle rb) {
-        // TODO
-    }    
+    }
     
 }

@@ -4,7 +4,7 @@
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane id="AnchorPane" prefHeight="588.0" prefWidth="572.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.65" fx:controller="readwritebe.AppController">
+<AnchorPane id="AnchorPane" prefHeight="588.0" prefWidth="572.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.65" fx:controller="readwritebe.gui.AppController">
     <children>
         <Button fx:id="button" layoutX="483.0" layoutY="222.0" onAction="#handleButtonAction" prefHeight="27.0" prefWidth="87.0" text="Load" />
       <ListView fx:id="lstPrisoners" layoutX="14.0" layoutY="14.0" prefHeight="563.0" prefWidth="465.0" />
