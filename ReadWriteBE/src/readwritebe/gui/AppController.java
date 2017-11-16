@@ -65,5 +65,27 @@ public class AppController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
     }    
+
+    @FXML
+    private void clickDelete(ActionEvent event) {
+        Prisoner selected = 
+                lstPrisoners.getSelectionModel().getSelectedItem();
+        
+        lstPrisoners.getItems().remove(selected);
+        
+        try {
+            bllManager.saveAllPrisoners(lstPrisoners.getItems());
+        }
+        catch (IOException ex) {
+            Alert alert = new Alert(Alert.AlertType.ERROR,
+                ex.getMessage()
+                + String.format("%n")
+                + "See error log for technical details."
+            );
+            alert.showAndWait();
+            
+            Logger.getLogger(AppController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
     
 }

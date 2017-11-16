@@ -21,5 +21,9 @@ public class BLLManager {
     public ObservableList<Prisoner> getAllPrisoners() throws IOException {
         return dalManager.getAllPrisoners();
     }
+
+    public void saveAllPrisoners(ObservableList<Prisoner> items) throws IOException {
+        dalManager.setAllPrisoners(items);
+    }
     
 }

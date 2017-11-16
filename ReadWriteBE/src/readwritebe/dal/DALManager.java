@@ -5,7 +5,7 @@
  */
 package readwritebe.dal;
 
-import java.io.IOException;
+import java.io.*;
 import java.nio.file.*;
 import java.util.*;
 import javafx.collections.FXCollections;
@@ -18,29 +18,44 @@ import readwritebe.be.Prisoner;
  */
 public class DALManager {
 
-    public ObservableList<Prisoner> getAllPrisoners() throws IOException {
+    public void setAllPrisoners(List<Prisoner> prisoners) throws IOException {
+        BufferedWriter bw = new BufferedWriter(
+                new FileWriter("Prisoners.csv", true));
 
-        List<String> allLinesAsStrings = new ArrayList();
-        ObservableList<Prisoner> prisoners = 
-                FXCollections.observableArrayList();
-        
+        for (Prisoner prisoner : prisoners) {
+            bw.write(
+                    prisoner.getSsn() + ","
+                    + prisoner.getName() + ","
+                    + prisoner.getRace() + ","
+                    + prisoner.getCountry() + ","
+                    + prisoner.getSentenceLength()
+            );
+            bw.newLine();
+        }
+
+    }
+
+    public ObservableList<Prisoner> getAllPrisoners() throws IOException {
+        ObservableList<Prisoner> prisoners
+                = FXCollections.observableArrayList();
+
         Path path = Paths.get("Prisoners.csv");
-        allLinesAsStrings = Files.readAllLines(path);
-        
+        List<String> allLinesAsStrings = Files.readAllLines(path);
+
         allLinesAsStrings.remove(0); // Removes header
         for (String line : allLinesAsStrings) {
-                String[] fields = line.split(",");
-                Prisoner tempPrisoner = new Prisoner(
-                        fields[0], 
-                        fields[1], 
-                        fields[2], 
-                        fields[3], 
-                        Integer.parseInt(fields[4]));
-                
-                prisoners.add(tempPrisoner);
+            String[] fields = line.split(",");
+            Prisoner tempPrisoner = new Prisoner(
+                    fields[0],
+                    fields[1],
+                    fields[2],
+                    fields[3],
+                    Integer.parseInt(fields[4].trim()));
+
+            prisoners.add(tempPrisoner);
         }
         return prisoners;
-        
+
         /*
         // OLD
         // Ensures close of the reader
@@ -70,7 +85,6 @@ public class DALManager {
         catch (IOException ex) {
             Logger.getLogger(AppController.class.getName()).log(Level.SEVERE, null, ex);
         }*/
-        
     }
-    
+
 }
