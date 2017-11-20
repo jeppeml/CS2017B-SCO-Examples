@@ -69,8 +69,6 @@ public class SerializableReadWrite extends Application {
             System.out.println(iceCream);
         }
         
-        
-        
         launch(args);
     }
     
