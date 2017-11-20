@@ -5,8 +5,11 @@
  */
 package jdbcwithguiprison.dal;
 
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import jdbcwithguiprison.BE.Prisoner;
 
 /**
@@ -14,20 +17,32 @@ import jdbcwithguiprison.BE.Prisoner;
  * @author jeppjleemoritzled
  */
 public class PrisonerDAO {
+
+    private ConnectionManager cm = new ConnectionManager();
+
     public List<Prisoner> getAllPrisoners() {
-        List<Prisoner> allPrisoners =
-                new ArrayList();
-        
-        Prisoner p = new Prisoner();
-        
-        p.setId(0);
-        p.setName("Peter Stegger");
-        p.setNationality("Germany");
-        p.setRace("Mixed");
-        p.setSentenceLength(100);
-        p.setSsn("423-434-666");
-        
-        allPrisoners.add(p);
+        List<Prisoner> allPrisoners
+                = new ArrayList();
+
+        try (Connection con = cm.getConnection()) {
+            Statement stmt = con.createStatement();
+            ResultSet rs = stmt.executeQuery(
+                    "SELECT * FROM Prisoners");
+            while (rs.next()) {
+                Prisoner p = new Prisoner();
+                p.setId(rs.getInt("id"));
+                p.setName(rs.getString("name"));
+                p.setNationality(rs.getString("nationality"));
+                p.setRace(rs.getString("race"));
+                p.setSentenceLength(rs.getInt("sentencelength"));
+                p.setSsn(rs.getString("ssn"));
+                
+                allPrisoners.add(p);
+            }
+        }
+        catch (SQLException ex) {
+            Logger.getLogger(PrisonerDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
         return allPrisoners;
     }
 }
