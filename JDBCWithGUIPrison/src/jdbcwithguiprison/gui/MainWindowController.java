@@ -14,6 +14,7 @@ import javafx.event.EventType;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ListView;
+import javafx.scene.control.TextField;
 import jdbcwithguiprison.bll.BLLManager;
 
 /**
@@ -27,6 +28,8 @@ public class MainWindowController implements Initializable {
     
     private BLLManager bllManager = 
             new BLLManager();
+    @FXML
+    private TextField txtFilter;
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -37,8 +40,10 @@ public class MainWindowController implements Initializable {
     private void clickLoadDB(ActionEvent event) {
         
         List<Prisoner> allPrisoners =
-                bllManager.getAllPrisoners();
+                bllManager.getAllPrisonersByNationality(
+                    txtFilter.getText());
         
+        lstPrisoners.getItems().clear();
         lstPrisoners.getItems().addAll(allPrisoners);
     }
     

@@ -19,4 +19,8 @@ public class BLLManager {
     public List<Prisoner> getAllPrisoners() {
         return pdao.getAllPrisoners();
     }
+    public List<Prisoner> getAllPrisonersByNationality(
+             String nationality) {
+        return pdao.getAllPrisonersByNationality(nationality);
+    }        
 }
