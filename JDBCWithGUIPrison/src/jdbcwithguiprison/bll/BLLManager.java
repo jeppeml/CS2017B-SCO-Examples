@@ -23,4 +23,13 @@ public class BLLManager {
              String nationality) {
         return pdao.getAllPrisonersByNationality(nationality);
     }        
+
+    public void remove(Prisoner selectedPrisoner) {
+        pdao.remove(selectedPrisoner);
+    }
+    
+    public void add(Prisoner prisoner)
+    {
+        pdao.add(prisoner);
+    }
 }

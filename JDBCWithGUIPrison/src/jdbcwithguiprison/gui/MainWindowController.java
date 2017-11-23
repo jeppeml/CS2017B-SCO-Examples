@@ -26,10 +26,20 @@ public class MainWindowController implements Initializable {
     @FXML
     private ListView<Prisoner> lstPrisoners;
     
-    private BLLManager bllManager = 
+    private final BLLManager bllManager = 
             new BLLManager();
     @FXML
     private TextField txtFilter;
+    @FXML
+    private TextField txtName;
+    @FXML
+    private TextField txtSSN;
+    @FXML
+    private TextField txtNationality;
+    @FXML
+    private TextField txtRace;
+    @FXML
+    private TextField txtSentenceLength;
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -38,13 +48,38 @@ public class MainWindowController implements Initializable {
 
     @FXML
     private void clickLoadDB(ActionEvent event) {
-        
         List<Prisoner> allPrisoners =
                 bllManager.getAllPrisonersByNationality(
                     txtFilter.getText());
         
         lstPrisoners.getItems().clear();
         lstPrisoners.getItems().addAll(allPrisoners);
+    }
+
+    @FXML
+    private void clickDelete(ActionEvent event) {
+        Prisoner selectedPrisoner =
+                lstPrisoners.getSelectionModel().getSelectedItem();
+        
+        bllManager.remove(selectedPrisoner);
+        lstPrisoners.getItems().remove(selectedPrisoner);
+        
+    }
+
+    @FXML
+    private void clickAddPrisoner(ActionEvent event) {
+        Prisoner prisoner = new Prisoner();
+        prisoner.setName(txtName.getText());
+        prisoner.setSsn(txtSSN.getText());
+        prisoner.setRace(txtRace.getText());
+        prisoner.setNationality(txtNationality.getText());
+        int sentLength = Integer.parseInt(
+                txtSentenceLength.getText());
+        prisoner.setSentenceLength(sentLength);
+        //lstPrisoners.getItems().add(prisoner);
+        
+        bllManager.add(prisoner);
+        clickLoadDB(event);
     }
     
 }

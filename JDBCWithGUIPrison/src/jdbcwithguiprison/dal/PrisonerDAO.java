@@ -20,20 +20,26 @@ public class PrisonerDAO {
 
     private ConnectionManager cm = new ConnectionManager();
 
-     public List<Prisoner> getAllPrisonersByNationality(
-             String nationality) {
-        
-        List<Prisoner> allPrisoners
-                = new ArrayList();
+    public List<Prisoner> getAllPrisonersByNationality(
+            String nationality) {
+
+        List<Prisoner> allPrisoners = new ArrayList();
 
         try (Connection con = cm.getConnection()) {
-            Statement stmt = con.createStatement();
-            ResultSet rs = stmt.executeQuery(
-                    "SELECT * FROM Prisoners " +
-                            "WHERE nationality LIKE '%"+
-                            nationality + "%' " + 
-                            " OR "+
-                            "[name] LIKE '%" + nationality + "%'");
+            // No good when having userinput, because SQL injection
+//            Statement stmt = con.createStatement();
+
+            String query
+                    = "SELECT * FROM Prisoners "
+                    + "WHERE nationality LIKE ? "
+                    + "ORDER BY id DESC";
+
+            // Protect against SQL injection
+            PreparedStatement pstmt
+                    = con.prepareStatement(query);
+            pstmt.setString(1, "%" + nationality + "%");
+
+            ResultSet rs = pstmt.executeQuery();
             while (rs.next()) {
                 Prisoner p = new Prisoner();
                 p.setId(rs.getInt("id"));
@@ -42,34 +48,7 @@ public class PrisonerDAO {
                 p.setRace(rs.getString("race"));
                 p.setSentenceLength(rs.getInt("sentencelength"));
                 p.setSsn(rs.getString("ssn"));
-                
-                allPrisoners.add(p);
-            }
-        }
-        catch (SQLException ex) {
-            Logger.getLogger(PrisonerDAO.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return allPrisoners; 
-         
-     }
-    
-    public List<Prisoner> getAllPrisoners() {
-        List<Prisoner> allPrisoners
-                = new ArrayList();
 
-        try (Connection con = cm.getConnection()) {
-            Statement stmt = con.createStatement();
-            ResultSet rs = stmt.executeQuery(
-                    "SELECT * FROM Prisoners");
-            while (rs.next()) {
-                Prisoner p = new Prisoner();
-                p.setId(rs.getInt("id"));
-                p.setName(rs.getString("name"));
-                p.setNationality(rs.getString("nationality"));
-                p.setRace(rs.getString("race"));
-                p.setSentenceLength(rs.getInt("sentencelength"));
-                p.setSsn(rs.getString("ssn"));
-                
                 allPrisoners.add(p);
             }
         }
@@ -77,5 +56,67 @@ public class PrisonerDAO {
             Logger.getLogger(PrisonerDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return allPrisoners;
+
+    }
+
+    public List<Prisoner> getAllPrisoners() {
+        List<Prisoner> allPrisoners
+                = new ArrayList();
+
+        try (Connection con = cm.getConnection()) {
+            PreparedStatement stmt
+                    = con.prepareStatement("SELECT * FROM Prisoners");
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                Prisoner p = new Prisoner();
+                p.setId(rs.getInt("id"));
+                p.setName(rs.getString("name"));
+                p.setNationality(rs.getString("nationality"));
+                p.setRace(rs.getString("race"));
+                p.setSentenceLength(rs.getInt("sentencelength"));
+                p.setSsn(rs.getString("ssn"));
+
+                allPrisoners.add(p);
+            }
+        }
+        catch (SQLException ex) {
+            Logger.getLogger(PrisonerDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return allPrisoners;
+    }
+
+    public void remove(Prisoner selectedPrisoner) {
+        try (Connection con = cm.getConnection()) {
+            String sql
+                    = "DELETE FROM Prisoners WHERE id=?";
+            PreparedStatement pstmt
+                    = con.prepareStatement(sql);
+            pstmt.setInt(1, selectedPrisoner.getId());
+            pstmt.execute();
+        }
+        catch (SQLException ex) {
+            Logger.getLogger(PrisonerDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public void add(Prisoner prisoner) {
+        try (Connection con = cm.getConnection()) {
+            String sql
+                = "INSERT INTO Prisoners"
+                    + "(name, ssn, nationality, race, sentencelength) "
+                    + "VALUES(?,?,?,?,?)";
+            PreparedStatement pstmt
+                    = con.prepareStatement(sql);
+            pstmt.setString(1, prisoner.getName());
+            pstmt.setString(2, prisoner.getSsn());
+            pstmt.setString(3, prisoner.getNationality());
+            pstmt.setString(4, prisoner.getRace());
+            pstmt.setInt(5, prisoner.getSentenceLength());
+            
+            pstmt.execute();
+        }
+        catch (SQLException ex) {
+            Logger.getLogger(PrisonerDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }
