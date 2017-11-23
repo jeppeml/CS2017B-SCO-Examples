@@ -53,7 +53,8 @@ public class PrisonerDAO {
             }
         }
         catch (SQLException ex) {
-            Logger.getLogger(PrisonerDAO.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(PrisonerDAO.class.getName()).log(
+                    Level.SEVERE, null, ex);
         }
         return allPrisoners;
 
@@ -80,7 +81,8 @@ public class PrisonerDAO {
             }
         }
         catch (SQLException ex) {
-            Logger.getLogger(PrisonerDAO.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(PrisonerDAO.class.getName()).log(
+                    Level.SEVERE, null, ex);
         }
         return allPrisoners;
     }
@@ -95,7 +97,8 @@ public class PrisonerDAO {
             pstmt.execute();
         }
         catch (SQLException ex) {
-            Logger.getLogger(PrisonerDAO.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(PrisonerDAO.class.getName()).log(
+                    Level.SEVERE, null, ex);
         }
     }
 
@@ -106,23 +109,27 @@ public class PrisonerDAO {
                     + "(name, ssn, nationality, race, sentencelength) "
                     + "VALUES(?,?,?,?,?)";
             PreparedStatement pstmt
-                    = con.prepareStatement(sql);
+                    = con.prepareStatement(
+                            sql, Statement.RETURN_GENERATED_KEYS);
             pstmt.setString(1, prisoner.getName());
             pstmt.setString(2, prisoner.getSsn());
             pstmt.setString(3, prisoner.getNationality());
             pstmt.setString(4, prisoner.getRace());
             pstmt.setInt(5, prisoner.getSentenceLength());
 
-            pstmt.executeUpdate();
-/*
+            int affected = pstmt.executeUpdate();
+            if (affected<1)
+                throw new SQLException("Prisoner could not be added");
+
             // Get database generated id
             ResultSet rs = pstmt.getGeneratedKeys();
             if (rs.next()) {
                 prisoner.setId(rs.getInt("id"));
-            }*/
+            }
         }
         catch (SQLException ex) {
-            Logger.getLogger(PrisonerDAO.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(PrisonerDAO.class.getName()).log(
+                    Level.SEVERE, null, ex);
         }
     }
 }
