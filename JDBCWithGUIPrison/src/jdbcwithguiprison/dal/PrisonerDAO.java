@@ -102,7 +102,7 @@ public class PrisonerDAO {
     public void add(Prisoner prisoner) {
         try (Connection con = cm.getConnection()) {
             String sql
-                = "INSERT INTO Prisoners"
+                    = "INSERT INTO Prisoners"
                     + "(name, ssn, nationality, race, sentencelength) "
                     + "VALUES(?,?,?,?,?)";
             PreparedStatement pstmt
@@ -112,8 +112,14 @@ public class PrisonerDAO {
             pstmt.setString(3, prisoner.getNationality());
             pstmt.setString(4, prisoner.getRace());
             pstmt.setInt(5, prisoner.getSentenceLength());
-            
-            pstmt.execute();
+
+            pstmt.executeUpdate();
+/*
+            // Get database generated id
+            ResultSet rs = pstmt.getGeneratedKeys();
+            if (rs.next()) {
+                prisoner.setId(rs.getInt("id"));
+            }*/
         }
         catch (SQLException ex) {
             Logger.getLogger(PrisonerDAO.class.getName()).log(Level.SEVERE, null, ex);

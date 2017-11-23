@@ -41,19 +41,16 @@ public class MainWindowController implements Initializable {
     @FXML
     private TextField txtSentenceLength;
     
+    PrisonerModel model = new PrisonerModel();
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        lstPrisoners.setItems(model.getPrisonersList());
     }    
 
     @FXML
     private void clickLoadDB(ActionEvent event) {
-        List<Prisoner> allPrisoners =
-                bllManager.getAllPrisonersByNationality(
-                    txtFilter.getText());
-        
-        lstPrisoners.getItems().clear();
-        lstPrisoners.getItems().addAll(allPrisoners);
+        model.loadAll();
     }
 
     @FXML
@@ -61,14 +58,13 @@ public class MainWindowController implements Initializable {
         Prisoner selectedPrisoner =
                 lstPrisoners.getSelectionModel().getSelectedItem();
         
-        bllManager.remove(selectedPrisoner);
-        lstPrisoners.getItems().remove(selectedPrisoner);
-        
+        model.remove(selectedPrisoner);
     }
 
     @FXML
     private void clickAddPrisoner(ActionEvent event) {
         Prisoner prisoner = new Prisoner();
+        prisoner.setId(-1);
         prisoner.setName(txtName.getText());
         prisoner.setSsn(txtSSN.getText());
         prisoner.setRace(txtRace.getText());
@@ -78,8 +74,7 @@ public class MainWindowController implements Initializable {
         prisoner.setSentenceLength(sentLength);
         //lstPrisoners.getItems().add(prisoner);
         
-        bllManager.add(prisoner);
-        clickLoadDB(event);
+        model.add(prisoner);
     }
     
 }
