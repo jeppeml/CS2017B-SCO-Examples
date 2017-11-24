@@ -132,4 +132,30 @@ public class PrisonerDAO {
                     Level.SEVERE, null, ex);
         }
     }
+
+    public void update(Prisoner prisoner) {
+        try (Connection con = cm.getConnection()) {
+            String sql
+                    = "UPDATE Prisoners SET "
+                    + "name=?, ssn=?, nationality=?, race=?, sentencelength=? "
+                    + "WHERE id=?";
+            PreparedStatement pstmt
+                    = con.prepareStatement(sql);
+            pstmt.setString(1, prisoner.getName());
+            pstmt.setString(2, prisoner.getSsn());
+            pstmt.setString(3, prisoner.getNationality());
+            pstmt.setString(4, prisoner.getRace());
+            pstmt.setInt(5, prisoner.getSentenceLength());
+            pstmt.setInt(6, prisoner.getId());
+
+            int affected = pstmt.executeUpdate();
+            if (affected<1)
+                throw new SQLException("Prisoner could not be updated");
+
+        }
+        catch (SQLException ex) {
+            Logger.getLogger(PrisonerDAO.class.getName()).log(
+                    Level.SEVERE, null, ex);
+        }
+    }
 }

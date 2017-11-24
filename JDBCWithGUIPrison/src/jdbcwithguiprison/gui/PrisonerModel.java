@@ -40,4 +40,8 @@ public class PrisonerModel {
         bllManager.add(prisoner);
         pList.add(prisoner);
     }
+
+    public void update(Prisoner prisoner) {
+        bllManager.update(prisoner);
+    }
 }

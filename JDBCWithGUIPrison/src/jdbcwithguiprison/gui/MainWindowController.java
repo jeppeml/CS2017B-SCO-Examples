@@ -5,25 +5,18 @@
  */
 package jdbcwithguiprison.gui;
 
-import com.sun.javafx.property.adapter.PropertyDescriptor;
 import java.io.IOException;
 import jdbcwithguiprison.BE.Prisoner;
 import java.net.URL;
-import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
-import javafx.event.EventType;
 import javafx.fxml.*;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.stage.Modality;
 import javafx.stage.Stage;
-import jdbcwithguiprison.bll.BLLManager;
 
 /**
  *
@@ -51,30 +44,30 @@ public class MainWindowController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-       
-        
+
         // One way of doing it
-        lstPrisoners.getSelectionModel()
-                .selectedItemProperty().addListener(
-                    new ChangeListener() {
-                        @Override
-                        public void changed(ObservableValue observable, Object oldValue, Object newValue) {
-                            fillTextFields();
-                        }
-                }
-                );
-        
+//        lstPrisoners.getSelectionModel()
+//                .selectedItemProperty().addListener(
+//                    new ChangeListener() {
+//                        @Override
+//                        public void changed(ObservableValue observable, Object oldValue, Object newValue) {
+//                            fillTextFields();
+//                        }
+//                }
+//                );
         // Another way of doing it
 //         MySelectionChangeListener listener =
 //                new MySelectionChangeListener(this);
 //         lstPrisoners.getSelectionModel()
 //                .selectedItemProperty().addListener(listener);
 //         
-         // Third way of doing it
+        // Third way of doing it
         lstPrisoners.getSelectionModel()
-            .selectedItemProperty()
+                .selectedItemProperty()
                 .addListener(
-                    (obs,oldVal,newVal)->{fillTextFields();}
+                        (obs, oldVal, newVal) -> {
+                            fillTextFields();
+                        }
                 );
 
         lstPrisoners.setItems(model.getPrisonersList());
@@ -128,18 +121,27 @@ public class MainWindowController implements Initializable {
     public void fillTextFields() {
         Prisoner selectedPrisoner
                 = lstPrisoners.getSelectionModel().getSelectedItem();
-
-        txtName.setText(selectedPrisoner.getName());
-        txtSSN.setText(selectedPrisoner.getSsn());
-        txtRace.setText(selectedPrisoner.getRace());
-        txtNationality.setText(selectedPrisoner.getNationality());
-        txtSentenceLength.setText(
-                selectedPrisoner.getSentenceLength() + "");
+        if (selectedPrisoner != null) {
+            txtName.setText(selectedPrisoner.getName());
+            txtSSN.setText(selectedPrisoner.getSsn());
+            txtRace.setText(selectedPrisoner.getRace());
+            txtNationality.setText(selectedPrisoner.getNationality());
+            txtSentenceLength.setText(
+                    selectedPrisoner.getSentenceLength() + "");
+        }
     }
 
     @FXML
     private void clickUpdate(ActionEvent event) {
-
+        Prisoner prisoner
+                = lstPrisoners.getSelectionModel().getSelectedItem();
+        prisoner.setName(txtName.getText());
+        prisoner.setSsn(txtSSN.getText());
+        prisoner.setRace(txtRace.getText());
+        prisoner.setNationality(txtNationality.getText());
+        prisoner.setSentenceLength(
+                Integer.parseInt(txtSentenceLength.getText()));
+        model.update(prisoner);
     }
 
 }

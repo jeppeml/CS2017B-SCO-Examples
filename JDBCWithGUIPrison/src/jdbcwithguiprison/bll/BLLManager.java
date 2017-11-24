@@ -32,4 +32,8 @@ public class BLLManager {
     {
         pdao.add(prisoner);
     }
+
+    public void update(Prisoner prisoner) {
+        pdao.update(prisoner);
+    }
 }
