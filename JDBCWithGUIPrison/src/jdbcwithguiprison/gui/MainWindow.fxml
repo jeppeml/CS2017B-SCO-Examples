@@ -23,5 +23,6 @@
       <TextField fx:id="txtNationality" layoutX="508.0" layoutY="154.0" />
       <TextField fx:id="txtRace" layoutX="508.0" layoutY="219.0" />
       <TextField fx:id="txtSentenceLength" layoutX="508.0" layoutY="282.0" />
+      <Button layoutX="584.0" layoutY="555.0" mnemonicParsing="false" onAction="#clickUpdate" text="Update" />
    </children>
 </AnchorPane>

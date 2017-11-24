@@ -24,7 +24,6 @@ public class WardenViewController implements Initializable {
 
     @FXML
     private TableView<Prisoner> tablePrisoners;
-
     PrisonerModel model;
     
     @FXML

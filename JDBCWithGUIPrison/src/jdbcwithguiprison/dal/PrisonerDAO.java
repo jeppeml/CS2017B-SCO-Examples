@@ -124,7 +124,7 @@ public class PrisonerDAO {
             // Get database generated id
             ResultSet rs = pstmt.getGeneratedKeys();
             if (rs.next()) {
-                prisoner.setId(rs.getInt("id"));
+                prisoner.setId(rs.getInt(1));
             }
         }
         catch (SQLException ex) {
