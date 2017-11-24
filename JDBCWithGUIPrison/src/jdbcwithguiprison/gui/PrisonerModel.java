@@ -35,4 +35,9 @@ public class PrisonerModel {
         bllManager.remove(selectedPrisoner);
         pList.remove(selectedPrisoner);
     }
+
+    public void add(Prisoner prisoner) {
+        bllManager.add(prisoner);
+        pList.add(prisoner);
+    }
 }

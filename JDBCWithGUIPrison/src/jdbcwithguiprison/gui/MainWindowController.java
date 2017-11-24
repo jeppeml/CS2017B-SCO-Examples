@@ -5,16 +5,22 @@
  */
 package jdbcwithguiprison.gui;
 
+import java.io.IOException;
 import jdbcwithguiprison.BE.Prisoner;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.event.EventType;
-import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
+import javafx.fxml.*;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 import jdbcwithguiprison.bll.BLLManager;
 
 /**
@@ -25,9 +31,7 @@ public class MainWindowController implements Initializable {
 
     @FXML
     private ListView<Prisoner> lstPrisoners;
-    
-    private final BLLManager bllManager = 
-            new BLLManager();
+
     @FXML
     private TextField txtFilter;
     @FXML
@@ -46,6 +50,23 @@ public class MainWindowController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         lstPrisoners.setItems(model.getPrisonersList());
+        try {
+            Stage newStage = new Stage();
+            FXMLLoader fxLoader = new FXMLLoader(getClass().getResource("WardenView.fxml"));
+
+            Parent root = fxLoader.load();
+            WardenViewController controller =
+                    fxLoader.getController();
+            
+            controller.setModel(model);
+            
+            Scene scene = new Scene(root);
+            newStage.setScene(scene);
+            newStage.show();
+        }
+        catch (IOException ex) {
+            Logger.getLogger(MainWindowController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }    
 
     @FXML
