@@ -1,0 +1,32 @@
+
+/* 
+    Created on : 05-02-2018, 09:12:11
+    Author     : jeppjleemoritzled
+*/
+
+@import url('https://fonts.googleapis.com/css?family=Monoton');
+
+.root{
+    -fx-background-color : #ffff00;
+    -fx-font-family: 'Monoton', cursive;
+}
+
+.check-box{
+    -fx-text-fill: blue;
+    -fx-background-color : #0BEEF0;
+}
+
+.button{
+    -fx-background-color: blue;
+    -fx-text-fill: yellow;
+}
+
+.gb{
+    -fx-background-color: green;
+}
+
+#specialOne{
+    -fx-font-family: 'AppleMyungjo';
+    -fx-font-size: 25;
+}
+
