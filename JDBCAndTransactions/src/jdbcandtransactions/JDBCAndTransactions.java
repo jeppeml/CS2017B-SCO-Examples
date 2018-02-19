@@ -6,7 +6,9 @@
 package jdbcandtransactions;
 
 import com.microsoft.sqlserver.jdbc.SQLServerDataSource;
+import com.microsoft.sqlserver.jdbc.SQLServerException;
 import java.sql.*;
+import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -49,25 +51,60 @@ public class JDBCAndTransactions {
         pstmt.execute();
     }
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
-        setupDB();
+    private static void transferMoney(int from, int to,
+            float amount) {
         try (Connection con = ds.getConnection()) {
             con.setAutoCommit(false); // enables transactions
+            con.setTransactionIsolation(
+                    Connection.TRANSACTION_REPEATABLE_READ);
+            Random r = new Random();
+            float fromBalance = getBalance(3, con);
+            try {
+                Thread.sleep(r.nextInt(300));
+            }
+            catch (InterruptedException ex) {
+                Logger.getLogger(JDBCAndTransactions.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            float toBalance = getBalance(12, con);
 
-            float soniaBalance = getBalance(3, con);
-            float ronicaBalance = getBalance(12, con);
-
-            setBalance(3, soniaBalance - 10000, con);
-            setBalance(12, ronicaBalance + 10000, con);
-
-            con.commit();
+            setBalance(from, fromBalance - amount, con);
+            setBalance(to, toBalance + amount, con);
+            try
+            {
+                con.commit();
+            }
+            catch (SQLServerException sse)
+            {
+                System.out.println("Mo' threads mo problems... Rolling back...");
+                con.rollback();
+            }
+            
             System.out.println("All good!");
         }
         catch (SQLException ex) {
             Logger.getLogger(JDBCAndTransactions.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String[] args) throws InterruptedException {
+        setupDB();
+
+        for (int i = 0; i < 10; i++) {
+            Thread t = new Thread(() -> {
+                while (true) {
+                    transferMoney(12, 3, 30000);
+                    transferMoney(3, 12, 30000);
+                }
+
+            });
+            t.start();
+        }
+        while (true) {
+            Thread.sleep(500);
+            System.out.println("Running...");
         }
 
     }
