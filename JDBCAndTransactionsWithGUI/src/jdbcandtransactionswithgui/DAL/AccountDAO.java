@@ -86,6 +86,7 @@ public class AccountDAO {
 
         try (Connection con = ds.getConnection()) {
             con.setAutoCommit(false);
+            con.setTransactionIsolation(Connection.TRANSACTION_REPEATABLE_READ);
             float currentBalance = getBalance(
                     selectedAccount.getAccountNo(), 
                     con);
