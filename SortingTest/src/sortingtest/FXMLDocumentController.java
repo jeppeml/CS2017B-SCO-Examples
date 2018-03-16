@@ -26,11 +26,6 @@ public class FXMLDocumentController implements Initializable {
     @FXML
     private ListView<Integer> listOutput;
     private Integer[] input = {4, 7, 2, 9, 20, 51, 1, 0, 8};
-
-    private void handleButtonAction(ActionEvent event) {
-        System.out.println("You clicked me!");
-        label.setText("Hello World!");
-    }
     
     private void createGiantIntList()
     {
