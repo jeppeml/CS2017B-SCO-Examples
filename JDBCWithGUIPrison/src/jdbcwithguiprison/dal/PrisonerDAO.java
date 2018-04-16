@@ -18,8 +18,12 @@ import jdbcwithguiprison.BE.Prisoner;
  */
 public class PrisonerDAO {
 
-    private ConnectionManager cm = new ConnectionManager();
+    private IConnectionManager cm;
 
+    public PrisonerDAO(IConnectionManager cm) {
+        this.cm = cm;
+    }
+    
     public List<Prisoner> getAllPrisonersByNationality(
             String nationality) {
 

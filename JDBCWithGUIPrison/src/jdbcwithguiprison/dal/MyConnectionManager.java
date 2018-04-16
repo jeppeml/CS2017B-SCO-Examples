@@ -13,9 +13,9 @@ import java.sql.Connection;
  *
  * @author jeppjleemoritzled
  */
-public class ConnectionManager implements IConnectionManager{
+public class MyConnectionManager implements IConnectionManager{
     private SQLServerDataSource ds = new SQLServerDataSource();
-    public ConnectionManager() {
+    public MyConnectionManager() {
         ds.setDatabaseName("CS2017A_39_PRISON");
         ds.setUser("CS2017A_39_java");
         ds.setPassword("javajava");
@@ -28,10 +28,4 @@ public class ConnectionManager implements IConnectionManager{
     {
         return ds.getConnection();
     }
-
-    @Override
-    public void pingConnection() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-    
 }
