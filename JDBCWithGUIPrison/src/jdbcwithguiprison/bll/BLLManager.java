@@ -7,15 +7,14 @@ package jdbcwithguiprison.bll;
 
 import java.util.List;
 import jdbcwithguiprison.BE.Prisoner;
-import jdbcwithguiprison.dal.MyConnectionManager;
-import jdbcwithguiprison.dal.PrisonerDAO;
+import jdbcwithguiprison.dal.*;
 
 /**
  *
  * @author jeppjleemoritzled
  */
 public class BLLManager {
-    PrisonerDAO pdao = new PrisonerDAO(new MyConnectionManager());
+    PrisonerDAO pdao = new PrisonerDAO(new ConnectionManager());
     
     public List<Prisoner> getAllPrisoners() {
         return pdao.getAllPrisoners();

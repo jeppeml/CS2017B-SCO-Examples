@@ -5,10 +5,14 @@
  */
 package jdbcwithguiprison.dal;
 
+import com.microsoft.sqlserver.jdbc.SQLServerException;
+import java.sql.Connection;
+
 /**
  *
  * @author jeppjleemoritzled
  */
 public interface IConnectionManager {
-    
+    Connection getConnection() throws SQLServerException;
+    void pingConnection();
 }

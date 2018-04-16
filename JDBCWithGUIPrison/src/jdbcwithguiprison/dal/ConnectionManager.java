@@ -13,8 +13,7 @@ import java.sql.Connection;
  *
  * @author jeppjleemoritzled
  */
-public class ConnectionManager implements IConnectionManager{
-    private SQLServerDataSource ds = new SQLServerDataSource();
+public class ConnectionManager extends AbstractConnectionManager{
     public ConnectionManager() {
         ds.setDatabaseName("CS2017A_39_PRISON");
         ds.setUser("CS2017A_39_java");
@@ -22,16 +21,9 @@ public class ConnectionManager implements IConnectionManager{
         ds.setPortNumber(1433);
         ds.setServerName("10.176.111.31");
     }
-    
-    @Override
-    public Connection getConnection() throws SQLServerException
-    {
-        return ds.getConnection();
-    }
 
     @Override
     public void pingConnection() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
 }

@@ -23,7 +23,10 @@ public class PrisonerDAO {
     public PrisonerDAO(IConnectionManager cm) {
         this.cm = cm;
     }
-    
+    public void doPing()
+    {
+        cm.pingConnection();
+    }
     public List<Prisoner> getAllPrisonersByNationality(
             String nationality) {
 
