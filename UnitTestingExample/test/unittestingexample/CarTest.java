@@ -5,7 +5,6 @@
  */
 package unittestingexample;
 
-import static org.hamcrest.CoreMatchers.*;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -42,36 +41,56 @@ public class CarTest {
      * Test of getPrice method, of class Car.
      */
     @Test
-    public void cat() {
-        double yellowExpectedPrice = 10_000f/(65_000f/44_000f);
-        Car c = new Car();
-        c.setColor("yellow");
-        c.setMilage(65_000);
-        assertEquals("Car price wrong",yellowExpectedPrice,c.getPrice(),0.5);
+    public void testGetPrice() {
+        System.out.println("getPrice");
+        Car instance = new Car("yellow");
+        instance.setMilage(1500);
+        double expResult = 293333;
+        double result = instance.getPrice();
+        assertEquals(expResult, result, 1);
         
-        Car c2 = new Car();
-        c2.setColor("Yellow");
-        c2.setMilage(65_000);
-        assertThat(c2.getPrice(), is(not(10_000)));
-        assertThat(c2.getPrice(), is(yellowExpectedPrice));
+    }
+
+    /**
+     * Test of getMaxPrice method, of class Car.
+     */
+    @Test
+    public void testGetMaxPrice() {
+        System.out.println("getMaxPrice");
+        Car instance = null;
+        double expResult = 0.0;
+        double result = instance.getMaxPrice();
+        assertEquals(expResult, result, 0.0);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
     }
 
     /**
      * Test of getMilage method, of class Car.
      */
     @Test
-    public void hat() {
+    public void testGetMilage() {
         System.out.println("getMilage");
-       
-        Car instance = new Car();
-        instance.setMilage(65_000);
-        double expResult = 65_000;
+        Car instance = null;
+        double expResult = 0.0;
         double result = instance.getMilage();
-        assertEquals(expResult, result, 0.5);
-        assertThat(result, is(expResult));
-        
+        assertEquals(expResult, result, 0.0);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
     }
 
+    /**
+     * Test of setMilage method, of class Car.
+     */
+    @Test
+    public void testSetMilage() {
+        System.out.println("setMilage");
+        double milage = 0.0;
+        Car instance = null;
+        instance.setMilage(milage);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
 
     /**
      * Test of getColor method, of class Car.
@@ -79,10 +98,25 @@ public class CarTest {
     @Test
     public void testGetColor() {
         System.out.println("getColor");
-        Car car = new Car();
-        car.setColor("yellow");
-        String result = car.getColor();
-        assertEquals("yellow", result);
+        Car instance = null;
+        String expResult = "";
+        String result = instance.getColor();
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of setColor method, of class Car.
+     */
+    @Test
+    public void testSetColor() {
+        System.out.println("setColor");
+        String color = "";
+        Car instance = null;
+        instance.setColor(color);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
     }
 
     

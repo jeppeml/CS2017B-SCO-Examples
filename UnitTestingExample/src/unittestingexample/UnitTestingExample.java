@@ -15,7 +15,7 @@ public class UnitTestingExample {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        Car c = new Car();
+        Car c = new Car("");
         c.setColor("yellow");
         c.setMilage(65_000);
         System.out.println("Price: " + c.getPrice());

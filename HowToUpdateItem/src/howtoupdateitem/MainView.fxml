@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane id="AnchorPane" prefHeight="499.0" prefWidth="367.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.65" fx:controller="howtoupdateitem.MainViewController">
+   <children>
+      <TableView fx:id="tblCars" layoutX="14.0" layoutY="14.0" prefHeight="228.0" prefWidth="310.0">
+        <columns>
+          <TableColumn fx:id="colName" prefWidth="165.0" text="Name" />
+          <TableColumn fx:id="colPrice" minWidth="0.0" prefWidth="140.0" text="Price" />
+        </columns>
+      </TableView>
+      <ListView fx:id="lstCars" layoutX="14.0" layoutY="252.0" prefHeight="200.0" prefWidth="310.0" />
+   </children>
+</AnchorPane>

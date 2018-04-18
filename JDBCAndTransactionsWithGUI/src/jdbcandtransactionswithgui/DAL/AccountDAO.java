@@ -8,7 +8,6 @@ package jdbcandtransactionswithgui.DAL;
 import com.microsoft.sqlserver.jdbc.SQLServerDataSource;
 import com.microsoft.sqlserver.jdbc.SQLServerException;
 import java.sql.*;
-import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.collections.FXCollections;

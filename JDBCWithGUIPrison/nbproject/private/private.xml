@@ -2,6 +2,15 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group name="Projects"/>
+        <group name="Projects">
+            <file>file:/Users/jeppjleemoritzled/GitHub/CS2017B-SCO-Examples/JDBCWithGUIPrison/src/jdbcwithguiprison/dal/MyConnectionManager.java</file>
+            <file>file:/Users/jeppjleemoritzled/GitHub/CS2017B-SCO-Examples/JDBCWithGUIPrison/src/jdbcwithguiprison/JDBCWithGUIPrison.java</file>
+            <file>file:/Users/jeppjleemoritzled/GitHub/CS2017B-SCO-Examples/JDBCWithGUIPrison/src/jdbcwithguiprison/bll/BLLManager.java</file>
+            <file>file:/Users/jeppjleemoritzled/GitHub/CS2017B-SCO-Examples/JDBCWithGUIPrison/src/jdbcwithguiprison/BE/Prisoner.java</file>
+            <file>file:/Users/jeppjleemoritzled/GitHub/CS2017B-SCO-Examples/JDBCWithGUIPrison/src/jdbcwithguiprison/dal/AbstractConnectionManager.java</file>
+            <file>file:/Users/jeppjleemoritzled/GitHub/CS2017B-SCO-Examples/JDBCWithGUIPrison/src/jdbcwithguiprison/dal/IConnectionManager.java</file>
+            <file>file:/Users/jeppjleemoritzled/GitHub/CS2017B-SCO-Examples/JDBCWithGUIPrison/src/jdbcwithguiprison/dal/PrisonerDAO.java</file>
+            <file>file:/Users/jeppjleemoritzled/GitHub/CS2017B-SCO-Examples/JDBCWithGUIPrison/src/jdbcwithguiprison/dal/ConnectionManager.java</file>
+        </group>
     </open-files>
 </project-private>

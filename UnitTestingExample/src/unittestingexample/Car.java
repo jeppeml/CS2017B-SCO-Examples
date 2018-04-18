@@ -15,7 +15,14 @@ public class Car {
     
     private double milage;
     private double basePrice;
-    
+
+    public Car(String color) {
+        this.color = color;
+    }
+    public double getMaxPrice()
+    {
+        return getPrice()*1.7;
+    }
     public double getPrice()
     {
         switch (color.toLowerCase()) {
